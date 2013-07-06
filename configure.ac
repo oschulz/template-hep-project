@@ -23,6 +23,7 @@ AX_CXX_COMPILE_STDCXX_11([noext])
 # Checks for dependencies
 
 ROOTSYS_DEPS([glibs], [-lSpectrum])
+CLHEP_DEPS
 
 CXX_PROJECT_DEPS([])
 
