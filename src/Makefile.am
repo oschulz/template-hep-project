@@ -29,8 +29,6 @@ rootmap_DATA =
 libtemplate_project_la_SOURCES += libtemplate-project_rdict.cxx
 rootmap_DATA += .libs/libtemplate-project.rootmap
 
-if WITH_CLING
-
 rootmap_DATA += .libs/libtemplate@ROOTPCMDASH@project_rdict.pcm
 
 libtemplate-project_rdict.cxx: $(libtemplate_project_la_headers) template-project_LinkDef.h
@@ -44,14 +42,3 @@ libtemplate-project_rdict.cxx: $(libtemplate_project_la_headers) template-projec
 	cp libtemplate-project.rootmap libtemplate@ROOTPCMDASH@project_rdict.pcm .libs/
 
 .libs/libtemplate@ROOTPCMDASH@project_rdict.pcm: .libs/libtemplate-project.rootmap
-
-else # not WITH_CLING
-
-libtemplate-project_rdict.cxx: $(libtemplate_project_la_headers) template-project_LinkDef.h
-	$(ROOTCINT) -f $@ -c -p $(CPPFLAGS) `echo $(CXXFLAGS) | sed 's/\(^\|\s\)\(-std=[A-Za-z0-9+]\+\)\($$\|\s\)/\1\3/g'` $+
-
-.libs/libtemplate-project.rootmap: libtemplate-project.la | $(libtemplate_project_la_headers) template-project_LinkDef.h
-	$(RLIBMAP) -o $@.tmp -l .libs/libtemplate-project@SHLIBEXT@ -c $|
-	$(SED) 's|\.so$$|'@SHLIBEXT@'|' $@.tmp > $@ && $(RM) $@.tmp
-
-endif # WITH_CLING
