@@ -74,6 +74,7 @@ fi
 
 
 PACKAGE_VARNAME=`echo "${PACKAGE_TARNAME}" | sed 's/-/_/g'`
+PACKAGE_RMAPNAME=`echo "${PACKAGE_TARNAME}" | sed 's/-/mI/g'`
 DATE_YEAR=`date -u '+%Y'`
 
 
@@ -83,13 +84,13 @@ mv "template-project-config.in" "${PACKAGE_TARNAME}-config.in"
 
 for f in \
 	Makefile.am build-inst-run-test.sh configure.ac \
-	src/Makefile.am src/template-project-LinkDef.h doc/Doxyfile.in
+	src/Makefile.am src/template-project_LinkDef.h doc/Doxyfile.in
 do
-	sed "s|template-project|${PACKAGE_TARNAME}|g; s|template_project|${PACKAGE_VARNAME}|g" -i "$f"
+	sed "s|template-project|${PACKAGE_TARNAME}|g; s|template_project|${PACKAGE_VARNAME}|g; s|templatemIproject|${PACKAGE_RMAPNAME}|g" -i "$f"
 	sed "s|Template Project|${PACKAGE_NAME}|" -i "$f"
 done
 
-mv "src/template-project-LinkDef.h" "src/${PACKAGE_TARNAME}-LinkDef.h"
+mv "src/template-project_LinkDef.h" "src/${PACKAGE_TARNAME}_LinkDef.h"
 mv "src/template-project.cxx" "src/${PACKAGE_TARNAME}.cxx"
 mv "src/template_project.C" "src/${PACKAGE_VARNAME}.C"
 
