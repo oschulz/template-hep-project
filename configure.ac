@@ -17,6 +17,7 @@ AC_PROG_LIBTOOL
 AC_PROG_CXX
 
 CXX_PROJECT_INIT
+AX_CXX_COMPILE_STDCXX_11([noext])
 
 
 # Checks for dependencies
