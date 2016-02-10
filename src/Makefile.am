@@ -51,6 +51,7 @@ libtemplate-project_rdict.cxx: $(libtemplate_project_la_headers) template-projec
 	$(ROOTCINT) -f $@ -c -p $(CPPFLAGS) $(CXXFLAGS) $+
 
 .libs/libtemplate-project.rootmap: libtemplate-project.la | $(libtemplate_project_la_headers) template-project_LinkDef.h
-	$(RLIBMAP) -o $@ -l .libs/libtemplate-project@SHLIBEXT@ -c $|
+	$(RLIBMAP) -o $@.tmp -l .libs/libtemplate-project@SHLIBEXT@ -c $|
+	$(SED) 's|\.so$$|'@SHLIBEXT@'|' $@.tmp > $@ && $(RM) $@.tmp
 
 endif # WITH_CLING
