@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-PREFIX_DIR=`mktemp -t -d template-project-inst.XXXXXXXX`
+PREFIX_DIR=`mktemp -d -t template-project-inst.XXXXXXXX`
 echo "Install prefix: ${PREFIX_DIR}"
 
 ./autogen.sh
