@@ -32,11 +32,7 @@ rootmap_DATA += .libs/libtemplate-project.rootmap
 rootmap_DATA += .libs/libtemplate@ROOTPCMDASH@project_rdict.pcm
 
 libtemplate-project_rdict.cxx: $(libtemplate_project_la_headers) template-project_LinkDef.h
-<<<<<<< HEAD
 	$(ROOTCLING) -f $@.tmp -s libtemplate-project@SHLIBEXT@ -rml libtemplate-project@SHLIBEXT@ -rmf libtemplate-project.rootmap.tmp -I$(includedir) $+
-=======
-	$(ROOTCLING) -f $@.tmp -s libtemplate-project@SHLIBEXT@ -rml libtemplate-project@SHLIBEXT@ -rmf libtemplate-project.rootmap.tmp -c $(CPPFLAGS) $(CXXFLAGS) -I$(includedir) $+
->>>>>>> b83da742a84c0a83c3e774fea13f86b7ae906cfd
 	@# Some magic to prefix header names with "$(PACKAGE)/", and only that, in dictionary and rootmap:
 	$(GREP) -F -v '"'"`pwd`"'/",' $@.tmp | $(SED) 's|"\([^/"]*/\)*\([^/"]*[.]h\)",|"'$(PACKAGE)/'\2",| ; s|\\"\([^/"]*/\)*\([^/"]*[.]h\)\\"\\n"|\\"'$(PACKAGE)/'\2\\"\\n"|' > $@.tmp2
 	$(SED) 's|\$$clingAutoload\$$\([^/"]*/\)*|$$clingAutoload$$'$(PACKAGE)'/|; /.*DICTPAYLOAD(.*/,/.*)DICTPAYLOAD.*/ s|#include "\([^/"]*/\)*\(.*\)"|#include <'$(PACKAGE)'/\2>|' $@.tmp2 > $@ && $(RM) $@.tmp $@.tmp2
